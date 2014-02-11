@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>TeaLeaf</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>TeaLeaf<img src="images/clover.png" width=100px alt="CloverLeaf" style="float:left;"/></h1>
+        <p style="clear:both; padding-top:1em;">A Lagrangian-Eulerian hydrodynamics benchmark, part of the <a href="http://mantevo.org">mantevo</a> project.</p>
+        <p class="view"><a href="http://github.com/Warwick-PCAV/TeaLeaf">View the Project on GitHub <small>Warwick-PCAV/CloverLeaf</small></a></p>
+        <ul>
+          <li><a href="https://github.com/Warwick-PCAV/TeaLeaf/zipballmus/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Warwick-PCAV/TeaLeaf/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="http://github.com/Warwick-PCAV/TeaLeaf">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+      <h3>Introduction</h3>
+      <p>
+TeaLeaf is a mini-app that solves the linear heat conduction equation on a
+spatially decomposed regularly grid using a 5 point stencil with implicit
+solvers. It can also be run with the CloverLeaf explicit hydrodynamic solver to solve a
+conduction/advection problem using operator splitting between the two solves.
+See the CloverLeaf mini-app for more information on the hydrodynamic solver.
+TeaLeaf currently solves the equations in two dimensions, but three dimensional
+support will be added in an upcoming release.
+</p>
+
+<p>
+In TeaLeaf temperatures are stored at the cell centres. A conduction
+coefficient is calculated that is equal to the cell centred density or the
+reciprocal of the density. This is then averaged to each face of the cell for
+use in the solution. The solve is carried out using an implicit method due to
+the severe timestep limitations imposed by the stability criteria of an
+explicit solution for a parabolic partial differential equation. The implicit
+method requires the solution of a system of linear equations which form a
+regular sparse matrix with a well defined structure.
+</p>
+
+<p>
+The computation in TeaLeaf has been broken down into "kernels", low level
+building blocks with minimal complexity. Each kernel loops over the entire grid
+and updates the relevant mesh variables. Control logic within each kernel is
+kept to a minimum, allowing maximum optimisation by the compiler. Memory is
+sacrificed in order to increase performance, and any updates to variables that
+would introduce dependencies between loop iterations are written into copies of
+the mesh.
+</p>
+
+<p>
+Normally, third party solvers are used to invert the system of linear
+equations, because of the complexity of state of the art methods. For reference
+the simplest iterative method, the Jacobi method, has been included in the
+reference version. This does have the advantage of being matrix free and
+independent of library dependencies.
+</p>
+
+<p>
+This method has been written in Fortran, C with OpenMP and MPI and has also
+been ported to OpenACC to provide an accelerated capability. It is expected a
+Conjugate Gradient solver will be added in due course.
+</p>
+
+<p>
+The other versions invoke third party linear solvers and currently include
+Petsc, Trilinos and Hypre. For each of these version there are instructions on
+how to download, build and link in the relevant library.
+</p>
+
+      <p>
+      For more information, please see the documentiation included in the <a href="http://github.com/Warwick-PCAV/TeaLeaf">repository</a>.
+      </p>
+
+<h3>Released Implementations</h3>
+
+<ul>
+    <li>Reference implementation:</li>
+    <ul>
+        <li>Fortran, with OpenMP and MPI</li>
+    </ul>
+    <li>OpenACC</li>
+    <li>PETSc</li>
+    <li>Trilinos</li>
+    <li>HYPRE</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="http://github.com/Warwick-PCAV">Performance Computing and Visualisation Group</a>, University of Warwick, UK</p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36190086-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+  </body>
+</html>
