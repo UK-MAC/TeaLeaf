@@ -1,0 +1,12 @@
+[submodule "TeaLeaf_ref"]
+	path = TeaLeaf_ref
+	url = git@github.com:Warwick-PCAV/TeaLeaf_ref.git
+[submodule "TeaLeaf_HYPRE"]
+	path = TeaLeaf_HYPRE
+	url = git@github.com:Warwick-PCAV/TeaLeaf_HYPRE.git
+[submodule "TeaLeaf_PETSc"]
+	path = TeaLeaf_PETSc
+	url = git@github.com:Warwick-PCAV/TeaLeaf_PETSc.git
+[submodule "TeaLeaf_Trilinos"]
+	path = TeaLeaf_Trilinos
+	url = git@github.com:Warwick-PCAV/TeaLeaf_Trilinos.git
