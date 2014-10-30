@@ -1,4 +1,4 @@
-# TeaLeaf
+# TeaLeaf ![image](Tea3D_alpha_small.png "TeaLeaf")
 
 TeaLeaf is a mini-app that solves the linear heat conduction equation on a
 spatially decomposed regularly grid using a 5 point stencil with implicit
