@@ -158,3 +158,85 @@ make COMPILER=INTEL MPI_COMPILER=mpiifort C_MPI_COMPILER=mpiicc IEEE=1 \
 OPTIONS="-xavx" C_OPTIONS="-xavx"
 ```
 
+## Running the Code
+
+TeaLeaf takes no command line arguments. It expects to find a file called 
+`tea.in` in the directory it is running in.
+
+There are a number of input files that come with the code. To use any of these 
+they simply need to be copied to `tea.in` in the run directory and 
+TeaLeaf invoked. The invocation is system dependent. 
+
+For example for a hybrid run:
+
+```
+export OMP_NUM_THREADS=4
+
+mpirun -np 8 tea_leaf
+```
+
+### Weak and Strong Scaling
+
+Note that with strong scaling, as the task count increases for the same size 
+global problem, the memory use of each task decreases. Eventually, the mesh 
+data starts to fit into the various levels of cache. So even though the 
+communications overhead is increasing, super-scalar leaps in performance can be 
+seen as task count increases. Eventually all cache benefits are gained and the 
+communications dominate. 
+
+For weak scaling, memory use stays close to constant and these super-scalar 
+increases aren't seen but the communications overhead stays constant relative 
+to the computational overhead, and scaling remains good.
+
+### Other Issues to Consider
+
+System libraries and settings can also have a significant effect on performance. 
+
+The use of the `HugePage` library can make memory access more efficient. The 
+implementation of this is very system specific and the details will not be 
+expanded here. 
+
+Variation in clock speed, such as `SpeedStep` or `Turbo Boost`, is also 
+available on some hardware and care needs to be taken that the settings are 
+known. 
+
+Many systems also allow some level of hyperthreading at a core level. These 
+usually share floating point units and for a code like TeaLeaf, which is 
+floating point intensive and light on integer operations, are unlikely to 
+produce a benefit and more likely to reduce performance.
+
+TeaLeaf is considered a memory bound code. Most data does not stay in cache 
+very long before it is replaced. For this reason, memory speed can have a 
+significant effect on performance. For the same reason, the same is true of 
+hardware caches.
+
+## Testing the Results
+
+Even though bitwise answers cannot be expected across systems, answers should be 
+very close, though the iterative nature of the solves and the dependence on reduction in the MPI
+can affect this. A summary print of state variables is printed out by default every 
+ten diffusion steps and then at the end of the run. This print gives average 
+value of the volume, mass, density, internal energy and temperature. Only temperature shoul vary with step count
+because all boundaries are zero flux and there is no material motion.
+If mass, volume or enegry do not stay constant through a run, then 
+something is seriously wrong.
+
+There is a very simple, small self test include in the TeaLeaf. If the code is
+invoked no tean.in input file present, this test will be run and the answer tested
+against a "known" solution.
+
+There are four standard input files that are recommended for testing. 
+Initially it is suggested than `tea_bm_short.in` is run. This will self test.
+It is quick to run, even on a single core, and should stop after 87 steps.
+
+The second test to try is `tea_bm.in`. This runs for 1000 timesteps and is 
+more sensitive than the first test. Through this simulation the whole 
+computational mesh in traversed by the heat front and so it is a good test of the 
+parallel implementation because all internal boundaries will be crossed during 
+the course of the simulation. This is also self testing.
+
+The third test to try is `tea_bm16_short.in`. This is the "socket" test and 
+has a much larger mesh size and therefore, memory footprint. It will self test.
+
+The last test to run for validation purposes is `tea_bm16.in`. This is a 
+fairly long, large mesh run and will self test.
