@@ -1,12 +1,15 @@
 [submodule "TeaLeaf_ref"]
 	path = TeaLeaf_ref
-	url = git@github.com:Warwick-PCAV/TeaLeaf_ref.git
+	url = https://github.com/UK-MAC/TeaLeaf_ref.git
 [submodule "TeaLeaf_HYPRE"]
 	path = TeaLeaf_HYPRE
-	url = git@github.com:Warwick-PCAV/TeaLeaf_HYPRE.git
+	url = https://github.com/UK-MAC/TeaLeaf_HYPRE.git
 [submodule "TeaLeaf_PETSc"]
 	path = TeaLeaf_PETSc
-	url = git@github.com:Warwick-PCAV/TeaLeaf_PETSc.git
+	url = https://github.com/UK-MAC/TeaLeaf_PETSc.git
 [submodule "TeaLeaf_Trilinos"]
 	path = TeaLeaf_Trilinos
-	url = git@github.com:Warwick-PCAV/TeaLeaf_Trilinos.git
+	url = https://github.com/UK-MAC/TeaLeaf_Trilinos.git
+[submodule "TeaLeaf_OpenCL"]
+	path = TeaLeaf_OpenCL
+	url = https://github.com/UK-MAC/TeaLeaf_OpenCL.git
