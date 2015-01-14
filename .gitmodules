@@ -13,3 +13,6 @@
 [submodule "TeaLeaf_OpenCL"]
 	path = TeaLeaf_OpenCL
 	url = https://github.com/UK-MAC/TeaLeaf_OpenCL.git
+[submodule "TeaLeaf_CUDA"]
+	path = TeaLeaf_CUDA
+	url = https://github.com/UK-MAC/TeaLeaf_CUDA
