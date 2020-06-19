@@ -44,10 +44,7 @@ how to download, build and link in the relevant library.
 - Petsc
 - Trilinos
 - Hypre
-
-## Coming Soon:
-
-- CUDA and AMGX
+- CUDA
 
 ## TeaLeaf Build Procedure
 
@@ -92,6 +89,7 @@ Other supported compiler that will be recognised are:-
 * XL
 * PATHSCALE
 * PGI
+* ARM
 
 The default flags for each of these is show below:-
 
@@ -216,27 +214,9 @@ Even though bitwise answers cannot be expected across systems, answers should be
 very close, though the iterative nature of the solves and the dependence on reduction in the MPI
 can affect this. A summary print of state variables is printed out by default every 
 ten diffusion steps and then at the end of the run. This print gives average 
-value of the volume, mass, density, internal energy and temperature. Only temperature shoul vary with step count
+value of the volume, mass, density, internal energy and temperature. Only temperature should vary with step count
 because all boundaries are zero flux and there is no material motion.
 If mass, volume or enegry do not stay constant through a run, then 
 something is seriously wrong.
 
-There is a very simple, small self test include in the TeaLeaf. If the code is
-invoked no tean.in input file present, this test will be run and the answer tested
-against a "known" solution.
-
-There are four standard input files that are recommended for testing. 
-Initially it is suggested than `tea_bm_short.in` is run. This will self test.
-It is quick to run, even on a single core, and should stop after 87 steps.
-
-The second test to try is `tea_bm.in`. This runs for 1000 timesteps and is 
-more sensitive than the first test. Through this simulation the whole 
-computational mesh in traversed by the heat front and so it is a good test of the 
-parallel implementation because all internal boundaries will be crossed during 
-the course of the simulation. This is also self testing.
-
-The third test to try is `tea_bm16_short.in`. This is the "socket" test and 
-has a much larger mesh size and therefore, memory footprint. It will self test.
-
-The last test to run for validation purposes is `tea_bm16.in`. This is a 
-fairly long, large mesh run and will self test.
+There is a set of benchmarks contained in the folder `Benchmarks` to use for testing ranging from small quick tests that can be run on a laptop `tea_bm_1.in` to full node runs `tea_bm_5.in`. 
