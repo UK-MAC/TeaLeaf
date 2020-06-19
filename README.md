@@ -2,8 +2,7 @@
 
 TeaLeaf is a mini-app that solves the linear heat conduction equation on a
 spatially decomposed regularly grid using a 5 point stencil with implicit
-solvers. TeaLeaf currently solves the equations in two dimensions, but three
-dimensional support is in beta.
+solvers. TeaLeaf currently solves the equations in two dimensions.
 
 In TeaLeaf temperatures are stored at the cell centres. A conduction
 coefficient is calculated that is equal to the cell centred density or the
