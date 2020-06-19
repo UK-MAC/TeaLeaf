@@ -33,7 +33,7 @@ The solvers have been written in Fortran with OpenMP and MPI and they have also
 been ported to OpenCL to provide an accelerated capability.
 
 Other versions invoke third party linear solvers and currently include
-Petsc, Trilinos and Hypre, which are in beta release. For each of these version there are instructions on
+PETSc, Trilinos and Hypre, which are in beta release. For each of these version there are instructions on
 how to download, build and link in the relevant library.
 
 ## Current Implementations:
