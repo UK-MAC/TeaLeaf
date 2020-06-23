@@ -24,16 +24,16 @@ the mesh.
 Normally, third party solvers are used to invert the system of linear
 equations, because of the complexity of state of the art methods. For reference
 the simplest iterative method, the Jacobi method, has been included in the
-reference version as the default as well the option to use a Conjugate Gradient or a Chebyshev solver.
-These does have the advantage of being matrix free and independent of library dependencies.
-By deault a pre-conditioner is not invoked, but a simple pre-conditioner is available as an
-option which just uses diagonal scaling. Note that this simple method will not always speed up the solve time.
+reference version as the default as well the option to use a Conjugate Gradient (CG), Chebyshev solver and Polynomially Preconditioned CG method.
+These have the advantage of being matrix free and independent of library dependencies.
+By deault a pre-conditioner is not invoked, but a simple pre-conditioners are available as an
+option which just uses diagonal scaling, and block diagonal preconditioning.
 
 The solvers have been written in Fortran with OpenMP and MPI and they have also
-been ported to OpenCL to provide an accelerated capability.
+been ported to OpenCL and CUDA to provide an accelerated capability.
 
 Other versions invoke third party linear solvers and currently include
-PETSc, Trilinos and Hypre, which are in beta release. For each of these version there are instructions on
+PETSc, Trilinos and Hypre. For each of these version there are instructions on
 how to download, build and link in the relevant library.
 
 ## Current Implementations:
